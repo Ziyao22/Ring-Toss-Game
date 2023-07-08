@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{1E7A7834-939D-6D65-5958-B95056AA47BE}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/levelController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/startPageAnimation.cs" Line="36" Column="44" />
+      <File FileName="Assets/Scripts/buttonChangeScene.cs" Line="15" Column="28" />
+      <File FileName="Assets/Scripts/levelController.cs" Line="10" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f3b5d6f8-1c27-42e8-89b9-97e611999830" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
