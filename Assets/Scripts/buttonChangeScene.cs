@@ -14,4 +14,10 @@ public class buttonChangeScene : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void reloadScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
