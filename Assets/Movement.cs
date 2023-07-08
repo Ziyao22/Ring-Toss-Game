@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public Transform targetObject; // The object to decrement the z scale
-
+    public GameObject cowObject;
     private Vector3 targetPosition = new Vector3(15.0f, 0.0f, -22.0f); // The position to move towards
     private Vector3 originalPosition; // The original position of the object
 
@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     // Flag to track if the object is currently moving
     private bool isMoving = false;
     private int count = 0;
+    private int points = 0; // Points tracking variable
 
     // Update is called once per frame
     void Update()
@@ -28,8 +29,10 @@ public class Movement : MonoBehaviour
             // Check if the object hasn't reached the target position
             if (distance <= 0.01f)
             {
-                // Increment the count
-                count++;
+                // Increment the count if the speed has changed
+                if (speed != originalSpeed)
+                    count++;
+
                 // Reset the object to its original position
                 transform.position = originalPosition;
             }
@@ -46,6 +49,7 @@ public class Movement : MonoBehaviour
     IEnumerator MoveToTarget()
     {
         originalPosition = transform.position; // Store the original position
+        originalSpeed = speed; // Store the original speed
 
         float startTime = Time.time; // Time when the movement starts
         float journeyLength = Vector3.Distance(originalPosition, targetPosition); // Total distance to move
@@ -69,6 +73,24 @@ public class Movement : MonoBehaviour
         // Reset the flag
         isMoving = false;
 
+        // Check for collision with the target object
+        if (cowObject != null && cowObject.GetComponent<Collider>() != null)
+        {
+            if (cowObject.GetComponent<Collider>().bounds.Intersects(GetComponent<Collider>().bounds))
+            {
+                // Collided with the target object, keep the speed the same
+                points--;
+                Debug.Log("Collision detected. Points decremented. Points: " + points + " Current Speed: " + speed);
+            }
+            else
+            {
+                // No collision with the target object, increment the speed
+                speed += 1f;
+                points++; 
+                Debug.Log("No collision detected. Speed incremented. Points: "+ points + " Current Speed: " + speed);
+            }
+        }
+
         // Decrease the target object's local z scale by 0.1f
         if (targetObject != null)
         {
@@ -76,9 +98,6 @@ public class Movement : MonoBehaviour
             scale += new Vector3(0f, 3f, 0f);
             targetObject.localScale = scale;
         }
-
-        // Increase the speed by 2
-        speed += 1f;
 
         // Check if the movement count reaches 10
         if (count >= 10)
